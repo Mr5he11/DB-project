@@ -12,7 +12,7 @@ Don't worry about this project however, this is just a silly project for a unive
 `giorno`, `ora`, `sala`, `film`, `prezzo`
 ##### `utenti_registrati`
 `nome`, `cognome`, `indirizzo_login`, `password`, `salt`
-##### `Prenotazioni`
+##### `prenotazioni`
 `programmazione_scelta`, `utente`, `numero di posti prenotati`
 ### Funzionalita`
 **Accesso senza login:**
