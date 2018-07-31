@@ -1,7 +1,7 @@
 <?php
     class Connection{
 
-        //parametri di connessione al database
+        //database connection parameters
         private $host;
         private $db;
         private $user;
@@ -12,11 +12,10 @@
         private $pdo;
         private static $instance = NULL;        
         
-        //costruttore: crea la connessione solo nel caso non sia gia` stata creata in precedenza, grazie alla funzione statica `getConnection`
-        //e` necessario implementare una classe che si rifa` al design pattern `singleton` per evitare di creare piu` instanze di connessione.
+        //constructor: creates pdo object only once
         private function __construct(){
 
-            //assegnamento dei parametri di connessione
+            //connection parameters assignment
             $this->host = '127.0.0.1';
             $this->db   = 'cinema';
             $this->user = 'root';
@@ -29,12 +28,11 @@
                 PDO::ATTR_EMULATE_PREPARES   => false,
             ];
 
-            //creazione dell'oggetto di connessione
+            //pdo object creation
             $this->pdo = new PDO($this->dsn, $this->user, $this->pass, $this->opt);
         }
 
-        //funzione statica che restituisce l'oggetto di connessione
-        //e ne crea uno, nel caso non fosse ancora stato creato
+        //static function implementing singleton design pattern
         public static function getConnection(){
             if(is_null(static::$instance)){
                 static::$instance = new Connection();

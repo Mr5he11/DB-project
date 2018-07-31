@@ -79,10 +79,9 @@
 						<ul class="movies">
 							<?php while(($row = $query->fetch()) && ($i++ < 3)){ ?>
 							<li>
-								<h4><?php echo($row['Titolo']); ?></h4>
+								<h4><a href="<?php echo($row['Collegamento']);?>" target="_blank"><?php echo($row['Titolo']); ?></a></h4>
 								<img src="<?php echo($row['Locandina']); ?>" class="playbill"/></br></br>
 								<p><?php echo($row['Descrizione']); ?></p>
-								<div class="wrapper"><a href="<?php echo($row['Collegamento']);?>" target="_blank" class="link2"><span><span>Vuoi saperne di piu`?</span></span></a></div>
 							</li>
 							<?php } ?>
 							<li class="clear">&nbsp;</li>
