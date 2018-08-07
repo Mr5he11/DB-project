@@ -4,7 +4,7 @@
 session_start();
 
 //define page
-$_SESSION['page'] = 'add-movie';
+$_SESSION['page'] = 'add-room';
 
 //call prelude file (db connection, etc)
 require 'components/prelude.php' ;
@@ -32,7 +32,7 @@ require 'components/prelude.php' ;
 </head>
 
 <body>
-    
+
     <?php include 'components/header.php'; ?>
 
     <!-- CONTENT-WRAPPER SECTION BEGIN-->

@@ -4,10 +4,21 @@
 session_start();
 
 //define page
-$_SESSION['page'] = 'add-movie';
+$_SESSION['page'] = 'modify-movie';
 
 //call prelude file (db connection, etc)
 require 'components/prelude.php' ;
+
+//fetch movie to modify
+$movie_get_query = 'SELECT * FROM Film WHERE Id=?';
+$movie_result = $conn->prepare($movie_get_query);
+$movie_result->execute([$_GET['movie']]);
+$movie = $movie_result->fetch();
+
+//fetch actors of the movie to modify
+$actors_get_query = 'SELECT * FROM Attori WHERE Film=?';
+$actors_result = $conn->prepare($actors_get_query);
+$actors_result->execute([$movie['Id']]);
 
 ?>
 
@@ -40,7 +51,7 @@ require 'components/prelude.php' ;
          <div class="container">
             <div class="row pad-botm">
                 <div class="col-md-12">
-                    <h4 class="header-line">ADD MOVIE</h4>
+                    <h4 class="header-line">UPDATE MOVIE</h4>
                 </div>
             </div>
             <div class="row">
@@ -48,66 +59,80 @@ require 'components/prelude.php' ;
                     <div class="alert alert-info text-center">
                         <h3> HI, ADMIN! </h3> 
                         <p>
-                            Here, you are free to add any movie you like to project in your cinema.
+                            Here, you are free to modify existing movies information.
+                            You can also delete the whole movie!
                             Just be sure of the information you insert. 
-                            It should be great if you add this film in a schedule now or ever.
+                            It not yet, you should be add this film in a schedule now or ever.
                             Have fun!
                         </p> 
                     </div>
                     <?php if(isset($_SESSION['empty_fields']) && $_SESSION['empty_fields']){ $_SESSION['empty_fields'] = FALSE; ?>
                     <div class="alert alert-danger" >
-                            <strong>WARNING :</strong> You forgot to fill some fields. Be carefull next time!
+                            <strong>WARNING :</strong> Some required fields are empty. Be careful next time!
                     </div>
                     <?php } ?>
                     <div class="panel panel-info">
                         <div class="panel-heading">
-                            INSERT MOVIE INFORMATION
+                            MODIFIED MOVIE INFORMATION
                         </div>
                         <div class="panel-body">
-                            <form role="form" action="exe-add-movie.php" method="POST">
+                            <form role="form" action="exe-modify-movie.php?movie=<?php echo($movie['Id']); ?>" method="POST">
                                 <div class="form-group">
                                     <label>MOVIE TITLE</label>
-                                    <input class="form-control" type="text" name="Titolo" required/>
+                                    <input class="form-control" type="text" name="Titolo" value="<?php echo($movie['Titolo']); ?>" required/>
                                     <p class="help-block">Type the name of the movie</p>
                                 </div>
                                 <div class="form-group">
                                     <label>FILM DIRECTOR</label>
-                                    <input class="form-control" type="text" name="Regista" required/>
+                                    <input class="form-control" type="text" name="Regista" value="<?php echo($movie['Regista']); ?>" required/>
                                     <p class="help-block">Enter one or more film directors, separeted by a comma (,)</p>
                                 </div>
                                 <div class="form-group">
                                     <label>PRODUCTION COMPANY</label>
-                                    <input class="form-control" type="text" name="CasaProduzione" required/>
+                                    <input class="form-control" type="text" name="CasaProduzione" value="<?php echo($movie['CasaProduzione']); ?>" required/>
                                     <p class="help-block">Enter one or more production companies, separeted by a comma (,)</p>
                                 </div>
                                 <div class="form-group">
                                     <label>DURATION</label>
-                                    <input class="form-control" type="text" name="Durata" required/>
+                                    <input class="form-control" type="text" name="Durata" value="<?php echo($movie['Durata']); ?>" required/>
                                     <p class="help-block">Enter the duration of the movie, expressed in minutes</p>
                                 </div>
                                 <div class="form-group">
                                     <label>IMAGE LINK</label>
-                                    <input class="form-control" type="text" name="Locandina"/>
+                                    <input class="form-control" type="text" name="Locandina" value="<?php echo($movie['Locandina']); ?>"/>
                                     <p class="help-block">Enter, if you want, the link of an image representing the movie</p>
                                 </div>
                                 <div class="form-group">
                                     <label>INFO LINK</label>
-                                    <input class="form-control" type="text" name="Collegamento"/>
+                                    <input class="form-control" type="text" name="Collegamento" value="<?php echo($movie['Collegamento']); ?>"/>
                                     <p class="help-block">Enter, if you want, the link of a webpage talking about this movie</p>
                                 </div>
                                 <div class="form-group">
                                     <label>DESCRIPTION</label>
-                                    <textarea class="form-control" rows="3" name="Descrizione"></textarea>
+                                    <textarea class="form-control" rows="3" name="Descrizione"><?php echo($movie['Descrizione']); ?></textarea>
                                     <p class="help-block">Enter a short description of the movie</p>
                                 </div>
                                 <div class="form-group">
                                     <label>ACTORS</label>
-                                    <textarea class="form-control" rows="3" name="Attori"></textarea>
+                                    <textarea class="form-control" rows="3" name="Attori"><?php 
+                                        $row = $actors_result->fetch();
+                                        echo($row['Nome']);
+                                        while($row = $actors_result->fetch()){
+                                            echo(','.$row['Nome']);
+                                        } 
+                                    ?></textarea>
                                     <p class="help-block">Enter a list of the main actors, each item should be separated from the others by a comma (example: Mara Maionchi,Fabio Rovazzi,Elton John)</p>
                                 </div>
-                                <button type="submit" class="btn btn-info">Add movie</button>
+                                <button type="submit" class="btn btn-info">Update movie</button>
                             </form>
                         </div>
+                    </div>
+                    <div class="alert alert-danger text-center">
+                        <h4> DELETE MOVIE </h4> 
+                        <p>
+                            <strong>Be careful!</strong> This operation cannot be undone. Every schedule related to this movie will be delated as well.
+                        </p> 
+                        <a href="exe-delete-movie?movie=<?php echo($_GET['movie']); ?>"><button class="btn btn-danger">Delete movie</button></a>
                     </div>
                 </div>
             </div>

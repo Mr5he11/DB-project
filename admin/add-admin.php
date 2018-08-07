@@ -1,34 +1,13 @@
 <?php
-    //start session
-    session_start();
 
-    //if no user is already logged, redirect to login page
-    if(!isset($_SESSION['user'])){
-        header('Location: login.php');
-    }
+//start session
+session_start();
 
-    //user query in order to take name/surname
-    //require connection configuration php file
-    require('../connect.php');
+//define page
+$_SESSION['page'] = 'add-admin';
 
-    //create connection object
-    $conn = Connection::getConnection();
-
-    //user selection query
-    $user_query = 'SELECT Nome, Cognome, Mail, Amministratore FROM Utenti where Mail=?';
-
-    //fetch user
-    $result = $conn->prepare($user_query);
-    $result->execute([$_SESSION['user']]);
-    $user = $result->fetch();
-    $user_name = $user['Nome'];
-    $user_surname = $user['Cognome'];
-    $admin = $user['Amministratore'];
-
-    //if not admin, redirect to login
-    if(!$admin){
-        header('Location: ../index.php');
-    }
+//call prelude file (db connection, etc)
+require 'components/prelude.php' ;
 
 ?>
 
@@ -53,57 +32,8 @@
 </head>
 
 <body>
-    <!-- LOGO HEADER BEGIN -->
-    <div class="navbar navbar-inverse set-radius-zero" >
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="index.php">
-                    <img class="logo" src="assets/img/logo.png" />
-                </a>
-            </div>
-        </div>
-    </div>
-    <!-- LOGO HEADER END-->
-    <!-- MENU SECTION BEGIN -->
-    <section class="menu-section">
-        <div class="container">
-            <div class="row ">
-                <div class="col-md-12">
-                    <div class="navbar-collapse collapse ">
-                        <ul id="menu-top" class="nav navbar-nav navbar-right">
-                            <li><a href="index.php">OVERVIEW</a></li>                           
-                            <li>
-                                <a href="#" class="dropdown-toggle" id="ddlmenuItem" data-toggle="dropdown">ADD <i class="fa fa-angle-down"></i></a>
-                                <ul class="dropdown-menu" role="menu" aria-labelledby="ddlmenuItem">
-                                    <li role="presentation"><a role="menuitem" tabindex="-1" class="menu-top-active" href="#">ADMIN</a></li>
-                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="add-movie.php">MOVIE</a></li>
-                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">SCHEDULE</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="tab.html">MANAGE USERS</a></li>
-                            <li class="dropdown">
-                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                    <?php echo(strtoupper($user_name.' '.$user_surname.' ')); ?> <i class="fa fa-angle-down"></i>
-                                </a>
-                                <ul class="dropdown-menu dropdown-user">
-                                    <li><a href="profile.php">USER PROFILE</a></li>
-                                    <li class="divider"></li>
-                                    <li><a href="exe-logout.php"></i>LOGOUT</a></li>
-                                </ul>
-                                <!-- /.dropdown-user -->
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- MENU SECTION END-->
+    
+    <?php include 'components/header.php'; ?>
 
     <!-- CONTENT-WRAPPER SECTION BEGIN-->
     <div class="content-wrapper">
@@ -182,17 +112,7 @@
     </div>
     <!-- CONTENT-WRAPPER SECTION END-->
 
-    <!-- FOOTER SECTION BEGIN -->
-    <section class="footer-section">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                   &copy; 2018 Cinema Website |<a href="https://sortof430.github.io/" target="_blank"  > Designed by : Stefano Sello </a> 
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- FOOTER SECTION END-->
+    <?php include 'components/footer.html'; ?>
     
     <!-- JAVASCRIPT FILES PLACED AT THE BOTTOM TO REDUCE THE LOADING TIME  -->
     <!-- CORE JQUERY  -->
