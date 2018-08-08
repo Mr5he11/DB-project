@@ -78,7 +78,7 @@ require 'components/prelude.php' ;
                                 <div class="form-group">
                                     <label>PRODUCTION COMPANY</label>
                                     <input class="form-control" type="text" name="CasaProduzione" required/>
-                                    <p class="help-block">Enter one or more production companies, separeted by a comma (,)</p>
+                                    <p class="help-block">Enter one or more production companies, each item should be separated from the others by a comma (example: Warner Bros,Disney,Pixar)</p>
                                 </div>
                                 <div class="form-group">
                                     <label>DURATION</label>

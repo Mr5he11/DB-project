@@ -55,6 +55,7 @@ require 'components/prelude.php' ;
                                 Have fun!
                             </p> 
                         </div>
+
                         <!-- PHP LOGIN ERROR MESSAGE BEGIN -->
                         <?php if(isset($_SESSION['wrong_mail']) && $_SESSION['wrong_mail'] == TRUE){ $_SESSION['wrong_mail'] = FALSE; ?>
                         <div class="alert alert-danger" >
@@ -62,6 +63,7 @@ require 'components/prelude.php' ;
                         </div>
                         <?php } ?>
                         <!-- PHP LOGIN ERROR MESSAGE END -->
+                        
                         <div class="panel panel-info">
                             <div class="panel-heading">
                                 INSERT NEW ADMIN INFORMATION

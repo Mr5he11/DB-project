@@ -20,6 +20,11 @@ $actors_get_query = 'SELECT * FROM Attori WHERE Film=?';
 $actors_result = $conn->prepare($actors_get_query);
 $actors_result->execute([$movie['Id']]);
 
+//fetch production companies of the movie to modify
+$productions_get_query = 'SELECT * FROM Produzioni WHERE Film=?';
+$productions_result = $conn->prepare($productions_get_query);
+$productions_result->execute([$movie['Id']]);
+
 ?>
 
 <html>
@@ -88,9 +93,15 @@ $actors_result->execute([$movie['Id']]);
                                     <p class="help-block">Enter one or more film directors, separeted by a comma (,)</p>
                                 </div>
                                 <div class="form-group">
-                                    <label>PRODUCTION COMPANY</label>
-                                    <input class="form-control" type="text" name="CasaProduzione" value="<?php echo($movie['CasaProduzione']); ?>" required/>
-                                    <p class="help-block">Enter one or more production companies, separeted by a comma (,)</p>
+                                    <label>PRODUCTION COMPANIES</label>
+                                    <textarea class="form-control" rows="3" name="CasaProduzione"><?php 
+                                        $row = $productions_result->fetch();
+                                        echo($row['Nome']);
+                                        while($row = $productions_result->fetch()){
+                                            echo(','.$row['Nome']);
+                                        } 
+                                    ?></textarea>
+                                    <p class="help-block">Enter a list of the main actors, each item should be separated from the others by a comma (example: Mara Maionchi,Fabio Rovazzi,Elton John)</p>
                                 </div>
                                 <div class="form-group">
                                     <label>DURATION</label>
