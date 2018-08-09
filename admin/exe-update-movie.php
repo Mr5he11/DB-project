@@ -3,17 +3,14 @@
 //start session
 session_start();
 
-//require connection configuration php file
-require('../connect.php');
-
-//create connection object
-$conn = Connection::getConnection();
+//require admin information
+require 'components/prelude.php';
 
 if($_POST['Titolo']=="" || $_POST['Regista']=="" || $_POST['CasaProduzione']=="" || $_POST['Durata']==""){
     //if, bypassed javascript, some fields are empty
     $_SESSION['empty_fields'] = TRUE;
     die();
-    header('Location: add-movie.php');
+    header('Location: update-movie.php');
 }else{
     //modify query
     $update_query = 'UPDATE Film 

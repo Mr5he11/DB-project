@@ -12,7 +12,7 @@ if (!isset($_SESSION['user'])) {
 } else {
     //user query in order to take name/surname
     //user selection query
-    $user_query = 'SELECT Nome, Cognome, Mail, Amministratore FROM Utenti where Mail=?';
+    $user_query = 'SELECT * FROM Utenti where Mail=?';
 
     //fetch user
     $result = $conn->prepare($user_query);
@@ -20,6 +20,9 @@ if (!isset($_SESSION['user'])) {
     $user = $result->fetch();
     $user_name = $user['Nome'];
     $user_surname = $user['Cognome'];
+    $user_mail = $user['Mail'];
+    $user_psw = $user['Password'];
+    $user_salt = $user['Salt'];
     $admin = $user['Amministratore'];
 
     //if not admin, redirect to login

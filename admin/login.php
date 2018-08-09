@@ -34,7 +34,7 @@
     <div class="navbar navbar-inverse set-radius-zero" >
         <div class="container">
             <div class="navbar-header">
-                <a class="navbar-brand" href="index.html">
+                <a class="navbar-brand" href="index.php">
                     <img src="assets/img/logo.png" class="logo"/>
                 </a>
             </div>

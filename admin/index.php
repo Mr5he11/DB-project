@@ -70,7 +70,13 @@ $movies = $conn->query($movie_query);
 
                 <?php if (isset($_SESSION['update-movie-success']) && $_SESSION['update-movie-success']) {$_SESSION['update-movie-success'] = false;?>
                 <div class="alert alert-success" >
-                        <strong>SUCCESS :</strong> Movie information updated successfully! :)
+                        <strong>SUCCESS :</strong> Movie information updated successfully! :) 
+                </div>
+                <?php }?>
+
+                <?php if (isset($_SESSION['update-profile-success']) && $_SESSION['update-profile-success']) {$_SESSION['update-profile-success'] = false;?>
+                <div class="alert alert-success" >
+                        <strong>SUCCESS :</strong> User profile information updated successfully! :)
                 </div>
                 <?php }?>
 
@@ -83,19 +89,19 @@ $movies = $conn->query($movie_query);
                         <div class="carousel-inner">
                             <?php $row = $movies->fetch();?>
                             <div class="item active">
-                                <a href="modify-movie.php?movie=<?php echo ($row['Id']); ?>">
+                                <a href="update-movie.php?movie=<?php echo ($row['Id']); ?>">
                                     <img src="<?php echo ($row['Locandina']); ?>" alt="" />
                                 </a>
                             </div>
                             <?php $row = $movies->fetch();?>
                             <div class="item">
-                                <a href="modify-movie.php?movie=<?php echo ($row['Id']); ?>">
+                                <a href="update-movie.php?movie=<?php echo ($row['Id']); ?>">
                                     <img src="<?php echo ($row['Locandina']); ?>" alt="" />
                                 </a>
                             </div>
                             <?php $row = $movies->fetch();?>
                             <div class="item">
-                                <a href="modify-movie.php?movie=<?php echo ($row['Id']); ?>">
+                                <a href="update-movie.php?movie=<?php echo ($row['Id']); ?>">
                                     <img src="<?php echo ($row['Locandina']); ?>" alt="" />
                                 </a>
                             </div>

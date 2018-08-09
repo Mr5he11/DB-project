@@ -3,11 +3,8 @@
 //start session
 session_start();
 
-//require connection configuration php file
-require('../connect.php');
-
-//create connection object
-$conn = Connection::getConnection();
+//require admin information
+require 'components/prelude.php';
 
 if($_POST['Nome']=="" || $_POST['NumeroPosti']==""){
     //if, bypassed javascript, some fields are empty

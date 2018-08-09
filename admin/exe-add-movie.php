@@ -3,18 +3,18 @@
 //start session
 session_start();
 
-//require connection configuration php file
-require('../connect.php');
+//require admin information
+require 'components/prelude.php';
 
-//create connection object
-$conn = Connection::getConnection();
+if ($_POST['Titolo'] == "" || $_POST['Regista'] == "" || $_POST['CasaProduzione'] == "" || $_POST['Durata'] == "") {
 
-if($_POST['Titolo']=="" || $_POST['Regista']=="" || $_POST['CasaProduzione']=="" || $_POST['Durata']==""){
     //if, bypassed javascript, some fields are empty
-    $_SESSION['empty_fields'] = TRUE;
+    $_SESSION['empty_fields'] = true;
     die();
     header('Location: add-movie.php');
-}else{
+
+} else {
+
     //insert query
     //movie information
     $insert_query = 'INSERT INTO Film (Titolo, Regista, Durata, Locandina, Descrizione, Collegamento) VALUES (?,?,?,?,?,?)';
@@ -46,11 +46,11 @@ if($_POST['Titolo']=="" || $_POST['Regista']=="" || $_POST['CasaProduzione']==""
         $result_productions = $conn->prepare($insert_productions_query);
         $result_productions->execute([$production, $movie['Id']]);
     }
-    
+
     unset($actor);
-    
+
     //redirect
-    $_SESSION['add-movie-success'] = TRUE;
+    $_SESSION['add-movie-success'] = true;
     header('Location: index.php');
 }
 

@@ -17,11 +17,11 @@
 
             //connection parameters assignment
             require 'psw.php';
-            $this->host = '127.0.0.1';
-            $this->db   = 'cinema';
-            $this->user = 'root';
+            $this->host = $host_conn;
+            $this->db   = $db_conn;
+            $this->user = $user_conn;
             $this->pass = $psw_conn;
-            $this->charset = 'utf8mb4';
+            $this->charset = $char_conn;
             $this->dsn = "mysql:host=$this->host;dbname=$this->db;charset=$this->charset";
             $this->opt = [
                 PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,

@@ -4,7 +4,7 @@
 session_start();
 
 //define page
-$_SESSION['page'] = 'modify-movie';
+$_SESSION['page'] = 'update-movie';
 
 //call prelude file (db connection, etc)
 require 'components/prelude.php' ;
@@ -81,7 +81,7 @@ $productions_result->execute([$movie['Id']]);
                             MODIFIED MOVIE INFORMATION
                         </div>
                         <div class="panel-body">
-                            <form role="form" action="exe-modify-movie.php?movie=<?php echo($movie['Id']); ?>" method="POST">
+                            <form role="form" action="exe-update-movie.php?movie=<?php echo($movie['Id']); ?>" method="POST">
                                 <div class="form-group">
                                     <label>MOVIE TITLE</label>
                                     <input class="form-control" type="text" name="Titolo" value="<?php echo($movie['Titolo']); ?>" required/>

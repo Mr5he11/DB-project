@@ -43,7 +43,7 @@
                                 <?php echo (strtoupper($user_name . ' ' . $user_surname . ' ')); ?> <i class="fa fa-angle-down"></i>
                             </a>
                             <ul class="dropdown-menu dropdown-user">
-                                <li><a href="profile.php" <?php if ($_SESSION['page']=='profile') { echo('class="menu-top-active"'); } ?>>USER PROFILE</a></li>
+                                <li><a href="update-profile.php" <?php if ($_SESSION['page']=='update-profile') { echo('class="menu-top-active"'); } ?>>USER PROFILE</a></li>
                                 <li class="divider"></li>
                                 <li><a href="exe-logout.php"></i>LOGOUT</a></li>
                             </ul>

@@ -30,7 +30,7 @@
     <div class="navbar navbar-inverse set-radius-zero" >
         <div class="container">
             <div class="navbar-header">
-                <a class="navbar-brand" href="index.html">
+                <a class="navbar-brand" href="index.php">
                     <img src="assets/img/logo.png" class="logo"/>
                 </a>
             </div>
@@ -83,9 +83,9 @@
                                 <p class="help-block">Re-type your password, so we will know that you are shure of it.</p>
                             </div>
                             <div id="psw_match">
-                                <?php if(isset($_SESSION['wrong_password'])){ ?>
+                                <?php if(isset($_SESSION['wrong_password']) && $_SESSION['wrong_password'] == TRUE){ $_SESSION['wrong_password'] = FALSE; ?>
                                 <div class="alert alert-danger" >
-                                    <strong>WARNING :</strong> Wrong username or password.
+                                    <strong>WARNING :</strong> The passwords don't match.
                                 </div>
                                 <?php } ?>
                             </div>

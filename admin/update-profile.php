@@ -4,7 +4,7 @@
 session_start();
 
 //define page
-$_SESSION['page'] = 'add-admin';
+$_SESSION['page'] = 'update-profile';
 
 //call prelude file (db connection, etc)
 require 'components/prelude.php' ;
@@ -40,7 +40,7 @@ require 'components/prelude.php' ;
          <div class="container">
             <div class="row pad-botm">
                 <div class="col-md-12">
-                    <h4 class="header-line">ADD ADMIN</h4>
+                    <h4 class="header-line">USER PROFILE</h4>
                 </div>
             </div>
             <div class="row">
@@ -49,51 +49,50 @@ require 'components/prelude.php' ;
                         <div class="alert alert-info text-center">
                             <h3> HI, ADMIN! </h3> 
                             <p>
-                                Here, you are free to add any administrator account you like to set in your cinema.
-                                Just be sure of the information you insert. 
-                                Consider that not everyone should be an admin.
+                                Here you can find all your account information.
+                                You are free to change them whenever you want.
                                 Have fun!
                             </p> 
                         </div>
 
                         <!-- PHP LOGIN ERROR MESSAGE BEGIN -->
-                        <?php if(isset($_SESSION['wrong_mail']) && $_SESSION['wrong_mail'] == TRUE){ $_SESSION['wrong_mail'] = FALSE; ?>
+                        <?php if(isset($_SESSION['wrong_password']) && $_SESSION['wrong_password'] == TRUE){ $_SESSION['wrong_password'] = FALSE; ?>
                         <div class="alert alert-danger" >
-                             <strong>WARNING :</strong> Wrong username or password.
+                             <strong>WARNING :</strong> Your 'old password' is wrong. Be careful next time!
                         </div>
                         <?php } ?>
                         <!-- PHP LOGIN ERROR MESSAGE END -->
                         
                         <div class="panel panel-info">
                             <div class="panel-heading">
-                                INSERT NEW ADMIN INFORMATION
+                                ACCOUNT INFORMATION
                             </div>
                             <div class="panel-body">
-                                <form role="form" method="POST" action="exe-add-admin.php"> 
+                                <form role="form" method="POST" action="exe-update-profile.php"> 
                                     <div class="form-group">
-                                        <label>Enter Name</label>
+                                        <label>Your current name is :</label> <?php echo($user_name); ?>
                                         <input class="form-control" type="text" name="Nome"/>
-                                        <p class="help-block">Enter your first name.</p>
+                                        <p class="help-block">Feed the input above to change your current name</p>
                                     </div> 
                                     <div class="form-group">
-                                        <label>Enter Surname</label>
+                                        <label>Your current surname is :</label> <?php echo($user_surname); ?>
                                         <input class="form-control" type="text" name="Cognome"/>
-                                        <p class="help-block">Enter you surname.</p>
+                                        <p class="help-block">Feed the input above to change your current surname</p>
                                     </div>                             
                                     <div class="form-group">
-                                        <label>Enter Email</label>
+                                        <label>Your current e-mail is :</label> <?php echo($user_mail); ?>
                                         <input class="form-control" type="text" name="Mail"/>
-                                        <p class="help-block">Enter the email you'll use to log into your account.</p>
+                                        <p class="help-block">Feed the input above to change your current e-mail</p>
                                     </div>
                                     <div class="form-group">
-                                        <label>Enter Password</label>
+                                        <label>Change Password</label>
                                         <input class="form-control" type="password" name="Password" id="password"/>
-                                        <p class="help-block">Enter your password. Remember that a weak password (less then eight characters) is easier to guess.</p>
+                                        <p class="help-block">Feed the input above to change your current password. Remember that a weak password (less then eight characters) is easier to guess.</p>
                                     </div>
                                     <div class="form-group">
-                                        <label>Re-enter Password</label>
+                                        <label>Re-enter new Password</label>
                                         <input class="form-control" type="password" name="ConfirmPassword" id="confirm_password"/>
-                                        <p class="help-block">Re-type your password, so we will know that you are shure of it.</p>
+                                        <p class="help-block">Re-type your new password, so we will know that you are shure of it.</p>
                                     </div>
                                     <div id="psw_match">
                                         <?php if(isset($_SESSION['wrong_password_2']) && $_SESSION['wrong_password_2'] == TRUE){ $_SESSION['wrong_password_2'] = FALSE; ?>
@@ -103,7 +102,28 @@ require 'components/prelude.php' ;
                                         <?php } ?>
                                     </div>
                                     </br>
-                                    <button type="submit" class="btn btn-success">Add admin</button>
+                                    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">Save changes</button>
+                                    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                    <h4 class="modal-title" id="myModalLabel">Confirm</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="form-group">
+                                                        <label>Enter your old password </label>
+                                                        <input class="form-control" type="password" name="OldPassword"/>
+                                                        <p class="help-block">In order to grant you no intrusions</p>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                    <button type="submit" class="btn btn-primary">Save changes</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </form>
                             </div>
                         </div>

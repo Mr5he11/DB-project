@@ -3,11 +3,8 @@
 //start session
 session_start();
 
-//require connection configuration php file
-require '../connect.php';
-
-//create connection object
-$conn = Connection::getConnection();
+//require admin information
+require 'components/prelude.php';
 
 //user selection query
 $user_query = 'SELECT Mail FROM Utenti where Mail=?';
