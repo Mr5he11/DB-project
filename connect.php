@@ -1,6 +1,6 @@
 <?php
     class Connection{
-
+        //prova commento
         //database connection parameters
         private $host;
         private $db;
