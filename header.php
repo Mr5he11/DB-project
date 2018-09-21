@@ -45,14 +45,15 @@
                                 //if not admin, redirect to login
                                 if ($admin) {
                                     header('Location: admin/index.php');
-                                }?>
+                                }
+                        ?>
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                                 <?php echo (strtoupper($user_name . ' ' . $user_surname . ' ')); ?> <i class="fa fa-angle-down"></i>
                             </a>
                             <ul class="dropdown-menu dropdown-user">
                                 <li><a href="update-profile.php" <?php if ($_SESSION['page']=='update-profile') { echo('class="menu-top-active"'); } ?>>USER PROFILE</a></li>
                                 <li class="divider"></li>
-                                <li><a href="exe-logout.php"></i>LOGOUT</a></li>
+                                <li><a href="admin/exe-logout.php"></i>LOGOUT</a></li>
                             </ul>
                         <?php } else { ?>
                         </li>
