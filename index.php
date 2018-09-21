@@ -14,6 +14,7 @@ $movie_query = 'SELECT * FROM Film ORDER BY Id DESC LIMIT 3';
 $conn = Connection::getConnection();
 $movies = $conn->query($movie_query);
 
+
 ?>
 
 <head>
