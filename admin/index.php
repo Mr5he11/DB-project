@@ -56,6 +56,12 @@ $movies = $conn->query($movie_query);
                 </div>
                 <?php }?>
 
+                <?php if (isset($_SESSION['add-schedule-success']) && $_SESSION['add-schedule-success']) {$_SESSION['add-schedule-success'] = false;?>
+                <div class="alert alert-success" >
+                        <strong>SUCCESS :</strong> Schedule added successfully! :)
+                </div>
+                <?php }?>
+
                 <?php if (isset($_SESSION['add-room-success']) && $_SESSION['add-room-success']) {$_SESSION['add-room-success'] = false;?>
                 <div class="alert alert-success" >
                         <strong>SUCCESS :</strong> Room added successfully! :)

@@ -69,7 +69,7 @@ require 'components/prelude.php' ;
                                 INSERT NEW ADMIN INFORMATION
                             </div>
                             <div class="panel-body">
-                                <form role="form" method="POST" action="exe-add-admin.php"> 
+                                <form role="form" method="POST" action="exe-signup.php"> 
                                     <div class="form-group">
                                         <label>Enter Name</label>
                                         <input class="form-control" type="text" name="Nome"/>
@@ -102,8 +102,9 @@ require 'components/prelude.php' ;
                                         </div>
                                         <?php } ?>
                                     </div>
+                                    <?php $_SESSION['admin_flag']=1; ?>
                                     </br>
-                                    <button type="submit" class="btn btn-success">Add admin</button>
+                                    <button type="submit" class="btn btn-success" id="submit" disabled>Add admin</button>
                                 </form>
                             </div>
                         </div>
@@ -129,8 +130,10 @@ require 'components/prelude.php' ;
         $('#password, #confirm_password').on('keyup', function () {
             if ($('#password').val() != '' && $('#password').val() != $('#confirm_password').val()) {
                 $('#psw_match').html('<div class="alert alert-danger"> <strong>WARNING :</strong> Passwords not matching.</div>');
+                $('#submit').prop("disabled",true);
             }else{
                 $('#psw_match').html('<div class="alert alert-success"> <strong>OK :</strong> Passwords matching.</div>');
+                $('#submit').prop("disabled",false);
             }
         });
     </script>

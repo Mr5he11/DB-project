@@ -15,11 +15,11 @@
         <![endif]-->
     <title>FREE RESPONSIVE HORIZONTAL ADMIN</title>
     <!-- BOOTSTRAP CORE STYLE  -->
-    <link href="assets/css/bootstrap.css" rel="stylesheet" />
+    <link href="admin/assets/css/bootstrap.css" rel="stylesheet" />
     <!-- FONT AWESOME STYLE  -->
-    <link href="assets/css/font-awesome.css" rel="stylesheet" />
+    <link href="admin/assets/css/font-awesome.css" rel="stylesheet" />
     <!-- CUSTOM STYLE  -->
-    <link href="assets/css/style.css" rel="stylesheet" />
+    <link href="admin/assets/css/style.css" rel="stylesheet" />
     <!-- GOOGLE FONT -->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
 
@@ -31,7 +31,7 @@
         <div class="container">
             <div class="navbar-header">
                 <a class="navbar-brand" href="index.php">
-                    <img src="assets/img/logo.png" class="logo"/>
+                    <img src="admin/assets/img/logo.png" class="logo"/>
                 </a>
             </div>
         </div>
@@ -56,7 +56,7 @@
                         </div>
                         <?php } ?>
                         <!-- PHP LOGIN ERROR MESSAGE END -->
-                        <form role="form" method="POST" action="exe-signup.php"> 
+                        <form role="form" method="POST" action="admin/exe-signup.php"> 
                             <div class="form-group">
                                 <label>Enter Name</label>
                                 <input class="form-control" type="text" name="Nome"/>
@@ -82,6 +82,7 @@
                                 <input class="form-control" type="password" name="ConfirmPassword" id="confirm_password"/>
                                 <p class="help-block">Re-type your password, so we will know that you are shure of it.</p>
                             </div>
+                            <?php $_SESSION['admin_flag']=0; ?>
                             <div id="psw_match">
                                 <?php if(isset($_SESSION['wrong_password']) && $_SESSION['wrong_password'] == TRUE){ $_SESSION['wrong_password'] = FALSE; ?>
                                 <div class="alert alert-danger" >
@@ -113,11 +114,11 @@
 
     <!-- JAVASCRIPT FILES PLACED AT THE BOTTOM TO REDUCE THE LOADING TIME  -->
     <!-- CORE JQUERY  -->
-    <script src="assets/js/jquery-1.10.2.js"></script>
+    <script src="admin/assets/js/jquery-1.10.2.js"></script>
     <!-- BOOTSTRAP SCRIPTS  -->
-    <script src="assets/js/bootstrap.js"></script>
+    <script src="admin/assets/js/bootstrap.js"></script>
     <!-- CUSTOM SCRIPTS  -->
-    <script src="assets/js/custom.js"></script>
+    <script src="admin/assets/js/custom.js"></script>
 
     <!-- CUSTOM PASSWORDS CHECK SCRIPT -->
     <script>

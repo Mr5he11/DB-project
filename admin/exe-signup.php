@@ -30,12 +30,13 @@ if($user){
     //build password
     $salt = generateRandomString(5);
     $psw = hash('sha256', hash('sha256', $_POST['Password']).$salt);
+    $flag = $_SESSION['admin_flag'];
 
     //insert query
-    $insert_query = 'INSERT INTO Utenti (Nome, Cognome, Mail, Password, Salt) VALUES (?,?,?,?,?)';
+    $insert_query = 'INSERT INTO Utenti (Nome, Cognome, Mail, Password, Salt, Amministratore) VALUES (?,?,?,?,?,?)';
     $result = $conn->prepare($insert_query);
-    $result->execute([$_POST['Nome'], $_POST['Cognome'], $_POST['Mail'], $psw, $salt]);
-    //header('Location: login.php');
+    $result->execute([$_POST['Nome'], $_POST['Cognome'], $_POST['Mail'], $psw, $salt, $flag]);
+    header('Location: admin/login.php');
 }
 
 function generateRandomString($length) {

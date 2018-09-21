@@ -22,14 +22,28 @@
                 <div class="navbar-collapse collapse ">
                     <ul id="menu-top" class="nav navbar-nav navbar-right">
                         <li>
-                            <a href="admin/programmation.php" <?php if ($_SESSION['page']=='prgrammation') { echo('class="menu-top-active"'); } ?>>PROGRAMMATION</a>
+                            <a href="programmation.php" <?php if ($_SESSION['page']=='prgrammation') { echo('class="menu-top-active"'); } ?>>PROGRAMMATION</a>
+                        </li>
+                        <li>
+                        <?php 
+                            if(isset($_SESSION['user'])){ ?>
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                <?php echo (strtoupper($user_name . ' ' . $user_surname . ' ')); ?> <i class="fa fa-angle-down"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-user">
+                                <li><a href="update-profile.php" <?php if ($_SESSION['page']=='update-profile') { echo('class="menu-top-active"'); } ?>>USER PROFILE</a></li>
+                                <li class="divider"></li>
+                                <li><a href="exe-logout.php"></i>LOGOUT</a></li>
+                            </ul>
+                        <?php } else { ?>
                         </li>
                         <li>
                             <a href="admin/login.php" <?php if ($_SESSION['page']=='log-in') { echo('class="menu-top-active"'); } ?>>LOG IN</a>
                         </li>
                         <li>
-                            <a href="admin/signup.php" <?php if ($_SESSION['page']=='sign-up') { echo('class="menu-top-active"'); } ?>>SIGN UP</a>
+                            <a href="signup.php" <?php if ($_SESSION['page']=='sign-up') { echo('class="menu-top-active"'); } ?>>SIGN UP</a>
                         </li>
+                        <?php } ?>
                     </ul>
                 </div>
             </div>

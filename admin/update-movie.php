@@ -143,7 +143,7 @@ $productions_result->execute([$movie['Id']]);
                         <p>
                             <strong>Be careful!</strong> This operation cannot be undone. Every schedule related to this movie will be delated as well.
                         </p> 
-                        <a href="exe-delete-movie?movie=<?php echo($_GET['movie']); ?>"><button class="btn btn-danger">Delete movie</button></a>
+                        <a href="exe-delete-movie.php?movie=<?php echo($_GET['movie']); ?>"><button class="btn btn-danger">Delete movie</button></a>
                     </div>
                 </div>
             </div>
