@@ -60,6 +60,7 @@ $movies = $conne->query($movie_query);
             </div>
         </div>
         <?php while ($row = $movies->fetch()) { ?>
+        <!--ciclo per mostrare le locandine e gli orari dei film-->
             <div class="container">
                 <div class="row">
                     <div class="col-md-5">
