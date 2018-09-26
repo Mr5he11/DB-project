@@ -23,6 +23,14 @@
     <!-- GOOGLE FONT -->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
 
+    <style>
+    
+
+    td {
+        padding: 10px;
+
+    }
+    </style>
 </head>
 
 <?php 
@@ -30,10 +38,17 @@
 require 'connect.php';
 
 //movie query
-$movie_query = "SELECT f.* FROM Film f JOIN Programmazione p ON f.Id = p.Film;";
+$movie_query = "SELECT Distinct f.* FROM Film f JOIN Programmazione p ON f.Id = p.Film;";
 $conne = Connection::getConnection();
 $movies = $conne->query($movie_query);
 
+//days query
+$days_query = "SELECT Distinct Giorno FROM Programmazione WHERE Film = ?";
+$days = $conne->prepare($days_query);
+
+//hours query
+$hours_query = "SELECT Ora FROM Programmazione WHERE Film = ? AND Giorno = ?";
+$hours = $conne->prepare($hours_query);
 ?>
 
 <body>
@@ -72,39 +87,26 @@ $movies = $conne->query($movie_query);
                         <h4> Regia di: <?php echo($row_film['Regista']); ?> <br></h4>
                         <h5> <?php echo($row_film['Descrizione']); ?><br><br><br> </h5>
 
-                        <div id="myModal" class="modal fade">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                        <h4 class="modal-title">Book your seat</h4>
-                                    </div>
-                                    <div class="modal-body">
-                                        <p> ou </p>
-                                        <?php
-                                        $days_query = "SELECT DISTINCT Giorno FROM Programmazione WHERE Film = ?";
-                                        $days = $pdo->prepare($days_query);
-                                        $days->execute([$row_film['Id']]); ?>
-                                        <p> ou </p>
-                                        <!--$days runs the days-->
-                                        <?php while($row_day = $days->fetch()) { ?>
-                                            <p> <?php echo($row_day['Giorno']); ?> </p>
-
-
-                                        <?php } ?>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Chiudi</button>
-                                        <button type="button" class="btn btn-primary">Invia</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>  
-                        
-                        <button class="btn btn-primary" data-toggle="modal" data-target="#myModal">Show schedule</button>
-                    
-
-                        <!--schedule of the film-->
+                        <form action="booking.php?film=<?php echo($row_film['Id'])?>" method="post">
+                            <!--$days runs the days-->
+                            <table>
+                            <?php $days->execute([$row_film['Id']]);
+                            while($row_day = $days->fetch()) { ?>
+                                <tr>
+                                <td><b> <?php echo($row_day['Giorno']); ?> </b></td>
+                                
+                                <!--$hours runs the hours-->
+                                <?php $hours->execute([$row_film['Id'], $row_day['Giorno']]); 
+                                while($row_hours = $hours->fetch()) { ?>
+                                    <td> 
+                                    <input type="radio" name="schedule" value="<?php echo($row_day['Giorno'].'.'.$row_hours['Ora']) ?>" > <?php echo($row_hours['Ora']); ?> </td>
+                                <?php } ?>
+                                </tr>
+                            <?php } ?>                    
+                            </table>
+                            <br>
+                            <button type="submit" class="btn btn-success">Booking</button>
+                        </form>
                         
                         
                     </div>
