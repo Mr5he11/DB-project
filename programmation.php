@@ -30,7 +30,7 @@
 require 'connect.php';
 
 //movie query
-$movie_query = "SELECT * FROM Film f JOIN Programmazione p ON f.Id = p.Id;";
+$movie_query = "SELECT f.* FROM Film f JOIN Programmazione p ON f.Id = p.Film;";
 $conne = Connection::getConnection();
 $movies = $conne->query($movie_query);
 
@@ -59,22 +59,54 @@ $movies = $conne->query($movie_query);
                 </div>
             </div>
         </div>
-        <?php while ($row = $movies->fetch()) { ?>
-        <!--ciclo per mostrare le locandine e gli orari dei film-->
+        <!--$movies runs the films-->
+        <?php while ($row_film = $movies->fetch()) { ?>
             <div class="container">
                 <div class="row">
                     <div class="col-md-5">
-                        <img src=" <?php echo($row['Locandina']); ?>" alt="" width="300">
+                        <img src=" <?php echo($row_film['Locandina']); ?>" alt="" width="300">
                     </div>
                     <div class="col-md-5">
                         <!--description of film-->
-                        <h2> <?php echo($row['Titolo']); ?> <br></h2>
-                        <h4> Regia di: <?php echo($row['Regista']); ?> <br></h4>
-                        <h5> <?php echo($row['Descrizione']); ?> </h5>
+                        <h2> <?php echo($row_film['Titolo']); ?> <br></h2>
+                        <h4> Regia di: <?php echo($row_film['Regista']); ?> <br></h4>
+                        <h5> <?php echo($row_film['Descrizione']); ?><br><br><br> </h5>
+
+                        <div id="myModal" class="modal fade">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title">Book your seat</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p> ou </p>
+                                        <?php
+                                        $days_query = "SELECT DISTINCT Giorno FROM Programmazione WHERE Film = ?";
+                                        $days = $pdo->prepare($days_query);
+                                        $days->execute([$row_film['Id']]); ?>
+                                        <p> ou </p>
+                                        <!--$days runs the days-->
+                                        <?php while($row_day = $days->fetch()) { ?>
+                                            <p> <?php echo($row_day['Giorno']); ?> </p>
+
+
+                                        <?php } ?>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Chiudi</button>
+                                        <button type="button" class="btn btn-primary">Invia</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>  
+                        
+                        <button class="btn btn-primary" data-toggle="modal" data-target="#myModal">Show schedule</button>
+                    
 
                         <!--schedule of the film-->
-                        <h3><br><br>Orari</h3>
-                        <h5><br> <?php echo($row['Giorno']); ?>, <?php echo($row['Ora']); ?> </h5>
+                        
+                        
                     </div>
                 </div>
                 <div class="row">
@@ -85,5 +117,15 @@ $movies = $conne->query($movie_query);
             </div>
         <?php } ?>
     </div>
+    <?php include 'footer.html'; ?> 
+
+    <!-- JAVASCRIPT FILES PLACED AT THE BOTTOM TO REDUCE THE LOADING TIME  -->
+    <!-- CORE JQUERY  -->
+    <script src="admin/assets/js/jquery-1.10.2.js"></script>
+    <!-- BOOTSTRAP SCRIPTS  -->
+    <script src="admin/assets/js/bootstrap.js"></script>
+    <!-- CUSTOM SCRIPTS  -->
+    <script src="admin/assets/js/custom.js"></script>
 </body>
+</html>
             

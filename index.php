@@ -25,7 +25,7 @@ $movies = $conn->query($movie_query);
     <!--[if IE]>
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <![endif]-->
-    <title>CINEMA - ADMIN</title>
+    <title>CINEMA - UTENTE</title>
     <!-- BOOTSTRAP CORE STYLE  -->
     <link href="admin/assets/css/bootstrap.css" rel="stylesheet" />
     <!-- FONT AWESOME STYLE  -->
