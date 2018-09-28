@@ -43,11 +43,11 @@ $conne = Connection::getConnection();
 $movies = $conne->query($movie_query);
 
 //days query
-$days_query = "SELECT Distinct Giorno FROM Programmazione WHERE Film = ?";
+$days_query = "SELECT DISTINCT Giorno FROM Programmazione WHERE Film = ?";
 $days = $conne->prepare($days_query);
 
 //hours query
-$hours_query = "SELECT Ora FROM Programmazione WHERE Film = ? AND Giorno = ?";
+$hours_query = "SELECT Id, Ora, Sala FROM Programmazione WHERE Film = ? AND Giorno = ?";
 $hours = $conne->prepare($hours_query);
 ?>
 
@@ -99,11 +99,15 @@ $hours = $conne->prepare($hours_query);
                                 <?php $hours->execute([$row_film['Id'], $row_day['Giorno']]); 
                                 while($row_hours = $hours->fetch()) { ?>
                                     <td> 
-                                    <input type="radio" name="schedule" value="<?php echo($row_day['Giorno'].'.'.$row_hours['Ora']) ?>" > <?php echo($row_hours['Ora']); ?> </td>
+                                    <input type="radio" name="schedule" value="<?php echo($row_hours["Id"].".".$row_hours["Sala"]) ?>" > <?php echo($row_hours['Ora']); ?> </td>
                                 <?php } ?>
                                 </tr>
                             <?php } ?>                    
                             </table>
+                            <div class="form-group">
+                                <label>How many seats?</label>
+                                <input type="number" name="people" class="form-control">
+                            </div>
                             <br>
                             <button type="submit" class="btn btn-success">Booking</button>
                         </form>
