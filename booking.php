@@ -19,14 +19,14 @@ if (isset($_POST['schedule'])) {
     //query seats not available
     $query_seats_booked = "SELECT sum(NumeroPostiPrenotati) FROM Prenotazioni JOIN Programmazione ON (ProgrammazioneScelta = Id) WHERE ProgrammazioneScelta = ?";
     $seats_booked = $conn->prepare($query_seats_booked);
-    if ($seats_booked->execute($id_pren)) {
+    if ($seats_booked->execute([$id_pren])) {
         $row_seats_book = $seats_booked->fetch();
     }
 
     //query seats
     $query_seats = "SELECT NumeroPosti FROM Sale WHERE Nome=?";
     $seats = $conn->prepare($query_seats);
-    $seats->execute($room);
+    $seats->execute([$room]);
     $row_seats = $seats->fetch();
 
     //seats available
@@ -45,10 +45,6 @@ if (isset($_POST['schedule'])) {
     echo("prova");
 
 
-
-    $data = explode(".",$data);
-    echo($film);
-    echo($data[0]." ".$data[1]." ".$_POST['people']);
 } else {
     $_SESSION['schedule_not_selected'] = true;
     header("Location: programmation.php");
