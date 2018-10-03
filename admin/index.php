@@ -82,9 +82,14 @@ $movies = $conn->query($movie_query);
 
                 <?php if (isset($_SESSION['update-profile-success']) && $_SESSION['update-profile-success']) {$_SESSION['update-profile-success'] = false;?>
                 <div class="alert alert-success" >
-                        <strong>SUCCESS :</strong> User profile information updated successfully! :)
+                        <strong>SUCCESS :</strong> Personal profile information updated successfully! :)
                 </div>
                 <?php }?>
+                <?php if (isset($_SESSION['update-user-success']) && $_SESSION['update-profile-success']) {?>
+                <div class="alert alert-success" >
+                        <strong>SUCCESS :</strong> <?php echo($_SESSION['update-user-success']);?>'s information updated successfully! :)
+                </div>
+                <?php $_SESSION['update-user-success'] = false;}?>
 
                 <!-- SUCCESS MESSAGES END -->
 

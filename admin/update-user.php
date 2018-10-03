@@ -81,7 +81,7 @@ if($info['Amministratore'] === 1){
                                 <?php echo(strtoupper($name.' '.$surname)) ?>'S ACCOUNT INFORMATION
                             </div>
                             <div class="panel-body">
-                                <form role="form" method="POST" action="exe-update-profile.php"> 
+                                <form role="form" method="POST" action="exe-update-user.php?user=<?php echo($_GET['mail']);?>"> 
                                     <div class="form-group">
                                         <label>Current name :</label> <?php echo($name); ?>
                                         <input class="form-control" type="text" name="Nome"/>
@@ -115,28 +115,7 @@ if($info['Amministratore'] === 1){
                                         <?php } ?>
                                     </div>
                                     </br>
-                                    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">Save changes</button>
-                                    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                                    <h4 class="modal-title" id="myModalLabel">Confirm</h4>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <div class="form-group">
-                                                        <label>Enter your old password </label>
-                                                        <input class="form-control" type="password" name="OldPassword"/>
-                                                        <p class="help-block">In order to grant you no intrusions</p>
-                                                    </div>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                    <button type="submit" class="btn btn-primary">Save changes</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <button type="submit" class="btn btn-primary btn-lg">Save changes</button>
                                 </form>
                             </div>
                         </div>
