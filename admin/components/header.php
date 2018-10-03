@@ -36,7 +36,13 @@
                             </ul>
                         </li>
                         <li>
-                            <a href="manage-users.php" <?php if ($_SESSION['page']=='manage-users') { echo('class="menu-top-active"'); } ?>>MANAGE USERS</a>
+                            <a class="dropdown-toggle" id="ddlmenuItem2" data-toggle="dropdown" href="#">
+                                MANAGE <i class="fa fa-angle-down"></i>
+                            </a>
+                            <ul class="dropdown-menu" role="menu" aria-labelledby="ddlmenuItem2">
+                                <li role="presentation"><a role="menuitem" tabindex="-1" href="manage-users.php" <?php if ($_SESSION['page']=='manage-users') { echo('class="menu-top-active"'); } ?>>USERS</a></li>
+                                <li role="presentation"><a role="menuitem" tabindex="-1" href="manage-movies.php" <?php if ($_SESSION['page']=='manage-movies') { echo('class="menu-top-active"'); } ?>>MOVIES</a></li>
+                            </ul>
                         </li>
                         <li class="dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
