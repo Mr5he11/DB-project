@@ -37,11 +37,8 @@ if (isset($_POST['schedule'])) {
     echo("<br>".$row_seats["NumeroPosti"]." ".$seats_available."<br>");
 
     if ( $seats_available > 0 ) {
-        echo("Prenotato per il film ".$_GET["film"]." nella sala ".$room);
-        echo("Bravo hai prenotato!");
-    } else {
-        echo("Sfigato!");
-    }
+        $query_insert("INSERT INTO `Prenotazioni` (`Utente`, `ProgrammazioneScelta`, `NumeroPostiPrenotati`) VALUES ('?', '?', '?');")
+    } 
 
 
 
