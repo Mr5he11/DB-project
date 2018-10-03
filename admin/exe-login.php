@@ -33,12 +33,15 @@ if($user){
 
     //check login credentials
     if($login->fetch()){
+
         $_SESSION['user'] = $user['Mail'];
-        
-        if (isset($_SESSION['programmation']) && $_SESSION['programmation'] == true) {    
-            header('Location: ../programmation.php');   
-        } else {
+        if(isset($_SESSION['programmation']) && $_SESSION['programmation'] = true){
+            $_SESSION['programmation'] = false;
+            header('Location: ../programmation.php');
+            exit();
+        }else{
             header('Location: index.php');
+            exit();
         }
     }
 }
