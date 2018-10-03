@@ -17,7 +17,7 @@ if (isset($_POST['schedule'])) {
     echo($id_pren);
 
     //query seats not available
-    $query_seats_booked = "SELECT sum(NumeroPostiPrenotati) FROM Prenotazioni JOIN Programmazione ON (ProgrammazioneScelta = Id) WHERE ProgrammazioneScelta = ?";
+    $query_seats_booked = "SELECT sum(NumeroPostiPrenotati) as postiPrenotati FROM Prenotazioni JOIN Programmazione ON (ProgrammazioneScelta = Id) WHERE ProgrammazioneScelta = ?";
     $seats_booked = $conn->prepare($query_seats_booked);
     if ($seats_booked->execute([$id_pren])) {
         $row_seats_book = $seats_booked->fetch();
@@ -29,14 +29,18 @@ if (isset($_POST['schedule'])) {
     $seats->execute([$room]);
     $row_seats = $seats->fetch();
 
-    //seats available
-    $seats_available = $row_seats["NumeroPosti"] - $row_seats_book["sum(NumeroPostiPrenotati)"];
+    echo("<br>".$row_seats_book["postiPrenotati"]);
 
-    if ( ($row_seats["NumeroPosti"] - $seats_available) > 0 ) {
+    //seats available
+    $seats_available = $row_seats["NumeroPosti"] - $row_seats_book["postiPrenotati"];
+
+    echo("<br>".$row_seats["NumeroPosti"]." ".$seats_available."<br>");
+
+    if ( $seats_available > 0 ) {
         echo("Prenotato per il film ".$_GET["film"]." nella sala ".$room);
         echo("Bravo hai prenotato!");
     } else {
-        echo("Sgigato");
+        echo("Sfigato!");
     }
 
 

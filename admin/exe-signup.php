@@ -39,10 +39,14 @@ if($user){
 
     $_SESSION['user'] = $_POST['Mail'];
 
-    if($flag){
-        header('Location: index.php');
-    }else{ 
-        header('Location: ../index.php');
+    if(isset($_SESSION['programmation'])) {
+        header('Location: programmation.php');
+    } else {
+        if($flag){
+            header('Location: index.php');
+        }else{ 
+            header('Location: ../index.php');
+        }
     }
 }
 

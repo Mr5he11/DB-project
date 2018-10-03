@@ -2,8 +2,9 @@
 
     //start session
     session_start();
-
+    $_SESSION['programmation'] = true;
 ?>
+
 <head>
     <title> Cinema - Programmation</title>
     <meta charset="utf-8" />
@@ -104,12 +105,24 @@ $hours = $conne->prepare($hours_query);
                                 </tr>
                             <?php } ?>                    
                             </table>
+                            
                             <div class="form-group">
                                 <label>How many seats?</label>
                                 <input type="number" name="people" class="form-control">
                             </div>
                             <br>
-                            <button type="submit" class="btn btn-success">Booking</button>
+                            <!-- if you are logged -->
+                            <?php if (isset($_SESSION['user'])) { ?>
+                                <button type="submit" id="submit" class="btn btn-success">Booking</button>
+                            <?php } else { ?>
+                            <!-- if you're not logged -->   
+                                <div class="col-md-2">
+                                    <input type="button" name="login" class="btn btn-success" onclick="window.location.href='admin/login.php'" value="Log In">
+                                </div> 
+                                <div class="col-md-2">
+                                    <input type="button" name="login" class="btn btn-success" onclick="window.location.href='signup.php'" value="Sing Up">
+                                </div>
+                            <?php } ?>
                         </form>
                         
                         
@@ -132,6 +145,9 @@ $hours = $conne->prepare($hours_query);
     <script src="admin/assets/js/bootstrap.js"></script>
     <!-- CUSTOM SCRIPTS  -->
     <script src="admin/assets/js/custom.js"></script>
+
+    <script> 
+
 </body>
 </html>
             

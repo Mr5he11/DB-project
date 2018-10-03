@@ -55,43 +55,48 @@
                         </div>
                         <?php } ?>
                         <!-- PHP LOGIN ERROR MESSAGE END -->
-                        <form role="form" method="POST" action="admin/exe-signup.php"> 
-                            <div class="form-group">
-                                <label>Enter Name</label>
-                                <input class="form-control" type="text" name="Nome"/>
-                                <p class="help-block">Enter your first name.</p>
-                            </div> 
-                            <div class="form-group">
-                                <label>Enter Surname</label>
-                                <input class="form-control" type="text" name="Cognome"/>
-                                <p class="help-block">Enter you surname.</p>
-                            </div>                             
-                            <div class="form-group">
-                                <label>Enter Email</label>
-                                <input class="form-control" type="text" name="Mail"/>
-                                <p class="help-block">Enter the email you'll use to log into your account.</p>
-                            </div>
-                            <div class="form-group">
-                                <label>Enter Password</label>
-                                <input class="form-control" type="password" name="Password" id="password"/>
-                                <p class="help-block">Enter your password. Remember that a weak password (less then eight characters) is easier to guess.</p>
-                            </div>
-                            <div class="form-group">
-                                <label>Re-enter Password</label>
-                                <input class="form-control" type="password" name="ConfirmPassword" id="confirm_password"/>
-                                <p class="help-block">Re-type your password, so we will know that you are shure of it.</p>
-                            </div>
-                            <?php $_SESSION['admin_flag']=0; ?>
-                            <div id="psw_match">
-                                <?php if(isset($_SESSION['wrong_password']) && $_SESSION['wrong_password'] == TRUE){ $_SESSION['wrong_password'] = FALSE; ?>
-                                <div class="alert alert-danger" >
-                                    <strong>WARNING :</strong> The passwords don't match.
+                        
+                        <?php if(isset($_SESSION['programmation'])) { ?>
+
+                        <?php } else { ?>
+                            <form role="form" method="POST" action="admin/exe-signup.php"> 
+                                <div class="form-group">
+                                    <label>Enter Name</label>
+                                    <input class="form-control" type="text" name="Nome"/>
+                                    <p class="help-block">Enter your first name.</p>
+                                </div> 
+                                <div class="form-group">
+                                    <label>Enter Surname</label>
+                                    <input class="form-control" type="text" name="Cognome"/>
+                                    <p class="help-block">Enter you surname.</p>
+                                </div>                             
+                                <div class="form-group">
+                                    <label>Enter Email</label>
+                                    <input class="form-control" type="text" name="Mail"/>
+                                    <p class="help-block">Enter the email you'll use to log into your account.</p>
                                 </div>
-                                <?php } ?>
-                            </div>
-                            </br>
-                            <button type="submit" class="btn btn-success">Sign Up</button>
-                        </form>
+                                <div class="form-group">
+                                    <label>Enter Password</label>
+                                    <input class="form-control" type="password" name="Password" id="password"/>
+                                    <p class="help-block">Enter your password. Remember that a weak password (less then eight characters) is easier to guess.</p>
+                                </div>
+                                <div class="form-group">
+                                    <label>Re-enter Password</label>
+                                    <input class="form-control" type="password" name="ConfirmPassword" id="confirm_password"/>
+                                    <p class="help-block">Re-type your password, so we will know that you are shure of it.</p>
+                                </div>
+                                <?php $_SESSION['admin_flag']=0; ?>
+                                <div id="psw_match">
+                                    <?php if(isset($_SESSION['wrong_password']) && $_SESSION['wrong_password'] == TRUE){ $_SESSION['wrong_password'] = FALSE; ?>
+                                    <div class="alert alert-danger" >
+                                        <strong>WARNING :</strong> The passwords don't match.
+                                    </div>
+                                    <?php } ?>
+                                </div>
+                                </br>
+                                <button type="submit" class="btn btn-success">Sign Up</button>
+                            </form>
+                        <?php } ?>
                     </div>
                 </div>
             </div>
