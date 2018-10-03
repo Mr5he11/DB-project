@@ -4,7 +4,6 @@
     session_start();
     $_SESSION['programmation'] = true;
 ?>
-
 <head>
     <title> Cinema - Programmation</title>
     <meta charset="utf-8" />
@@ -25,11 +24,8 @@
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
 
     <style>
-    
-
     td {
         padding: 10px;
-
     }
     </style>
 </head>
