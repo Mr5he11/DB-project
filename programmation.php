@@ -23,7 +23,7 @@
     $hours = $conn->prepare($hours_query);
 
 ?>
-
+<html>
 <head>
     <title> Cinema - Programmation</title>
     <meta charset="utf-8" />
@@ -47,6 +47,10 @@
     td {
         padding: 10px;
     }
+
+    .movie-img {
+        border: 2px solid black;    }
+
     </style>
 </head>
 
@@ -62,11 +66,19 @@
                     <h4 class="header-line">PROGRAMMATION</h4>
                 </div>
             </div>
+
             <?php if (isset($_SESSION['show-already-booked']) && $_SESSION['show-already-booked']) {$_SESSION['show-already-booked'] = false;?>
                 <div class="alert alert-danger" >
                         <strong>WARNING :</strong> You have already booked for this show! :( 
                 </div>
             <?php }?>
+
+            <?php if (isset($_SESSION['busy-room']) && $_SESSION['busy-room']) {$_SESSION['busy-room'] = false;?>
+                <div class="alert alert-danger" >
+                        <strong>WARNING :</strong> This show is full :( Try another one!
+                </div>
+            <?php }?>
+
         </div>
 
         <!--$movies runs the films-->
@@ -74,7 +86,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-5">
-                        <img src=" <?php echo($row_film['Locandina']); ?>" alt="" width="300">
+                        <img class="movie-img" src=" <?php echo($row_film['Locandina']); ?>" alt="" width="300">
                     </div>
                     <div class="col-md-5">
 
@@ -141,8 +153,6 @@
     <script src="admin/assets/js/bootstrap.js"></script>
     <!-- CUSTOM SCRIPTS  -->
     <script src="admin/assets/js/custom.js"></script>
-
-    <script> 
 
 </body>
 </html>

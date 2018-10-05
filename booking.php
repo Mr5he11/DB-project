@@ -49,12 +49,10 @@ if (isset($_POST['schedule'])) {
         $ris = $insert->execute([$_SESSION['user'], $id_pren, $_POST['people']]);
         $_SESSION['show-booking-success'] = true;
         header('Location: index.php');
-    } 
-
-
-
-    $film = $_GET['film'];
-    echo("prova");
+    } else {
+        $_SESSION['busy-room'] = true;
+        header("Location: programmation.php");
+    }
 
 
 } else {

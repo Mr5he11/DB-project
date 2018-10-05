@@ -4,7 +4,7 @@
 session_start();
 
 //define page
-$_SESSION['page'] = 'manage-users';
+$_SESSION['page'] = 'manage-movies';
 
 //call prelude file (db connection, etc)
 require 'components/prelude.php' ;
