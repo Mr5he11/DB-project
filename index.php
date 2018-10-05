@@ -48,10 +48,16 @@ $movies = $conn->query($movie_query);
                     <h4 class="header-line">HOME CINEMA</h4>
                 </div>
             </div>
+
+            <?php if (isset($_SESSION['show-booking-success']) && $_SESSION['show-booking-success']) {$_SESSION['show-booking-success'] = false;?>
+                <div class="alert alert-success" >
+                        <strong>SUCCESS :</strong> Show booked successfully! :) 
+                </div>
+            <?php }?>
             
             <div class="row">
                 <div class="col-md-8 col-sm-8 col-xs-12">
-                    <div id="carousel-example" class="carousel slide slide-bdr" data-ride="carousel" style="width: 60%; height: 50%; overflow: hidden;">
+                    <div id="carousel-example" class="carousel slide slide-bdr" data-ride="carousel" style="width: 40vw; height: 50vh; max-height: 40vw; overflow: hidden;">
                         <div class="carousel-inner">
                             <?php $row = $movies->fetch();?>
                             <div class="item active">

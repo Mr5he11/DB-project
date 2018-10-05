@@ -2,8 +2,28 @@
 
     //start session
     session_start();
+
+    //call prelude file (db connection, etc)
+    require 'connect.php';
+
+    //set useful variables
     $_SESSION['programmation'] = true;
+
+    //movie query
+    $movie_query = "SELECT Distinct f.* FROM Film f JOIN Programmazione p ON f.Id = p.Film;";
+    $conn = Connection::getConnection();
+    $movies = $conn->query($movie_query);
+
+    //days query
+    $days_query = "SELECT DISTINCT Giorno FROM Programmazione WHERE Film = ?";
+    $days = $conn->prepare($days_query);
+
+    //hours query
+    $hours_query = "SELECT Id, Ora, Sala FROM Programmazione WHERE Film = ? AND Giorno = ?";
+    $hours = $conn->prepare($hours_query);
+
 ?>
+
 <head>
     <title> Cinema - Programmation</title>
     <meta charset="utf-8" />
@@ -30,47 +50,25 @@
     </style>
 </head>
 
-<?php 
-//call prelude file (db connection, etc)
-require 'connect.php';
-
-//movie query
-$movie_query = "SELECT Distinct f.* FROM Film f JOIN Programmazione p ON f.Id = p.Film;";
-$conne = Connection::getConnection();
-$movies = $conne->query($movie_query);
-
-//days query
-$days_query = "SELECT DISTINCT Giorno FROM Programmazione WHERE Film = ?";
-$days = $conne->prepare($days_query);
-
-//hours query
-$hours_query = "SELECT Id, Ora, Sala FROM Programmazione WHERE Film = ? AND Giorno = ?";
-$hours = $conne->prepare($hours_query);
-?>
-
 <body>
 
-    <!-- LOGO HEADER BEGIN -->
-    <div class="navbar navbar-inverse set-radius-zero" >
-        <div class="container">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="index.php">
-                    <img src="admin/assets/img/logo.png" class="logo"/>
-                </a>
-            </div>
-        </div>
-    </div>
-    <!-- LOGO HEADER END-->
+    <?php include 'header.php'; ?>
 
     <!-- CONTENT-WRAPPER SECTION BEGIN-->
     <div class="content-wrapper">
-         <div class="container">
+        <div class="container">
             <div class="row pad-botm">
                 <div class="col-md-12">
                     <h4 class="header-line">PROGRAMMATION</h4>
                 </div>
             </div>
+            <?php if (isset($_SESSION['show-already-booked']) && $_SESSION['show-already-booked']) {$_SESSION['show-already-booked'] = false;?>
+                <div class="alert alert-danger" >
+                        <strong>WARNING :</strong> You have already booked for this show! :( 
+                </div>
+            <?php }?>
         </div>
+
         <!--$movies runs the films-->
         <?php while ($row_film = $movies->fetch()) { ?>
             <div class="container">
@@ -79,12 +77,14 @@ $hours = $conne->prepare($hours_query);
                         <img src=" <?php echo($row_film['Locandina']); ?>" alt="" width="300">
                     </div>
                     <div class="col-md-5">
+
                         <!--description of film-->
                         <h2> <?php echo($row_film['Titolo']); ?> <br></h2>
                         <h4> Regia di: <?php echo($row_film['Regista']); ?> <br></h4>
                         <h5> <?php echo($row_film['Descrizione']); ?><br><br><br> </h5>
 
                         <form action="booking.php?film=<?php echo($row_film['Id'])?>" method="post">
+
                             <!--$days runs the days-->
                             <table>
                             <?php $days->execute([$row_film['Id']]);
@@ -105,12 +105,13 @@ $hours = $conne->prepare($hours_query);
                             <div class="form-group">
                                 <label>How many seats?</label>
                                 <input type="number" name="people" class="form-control">
-                            </div>
-                            <br>
+                            </div><br>
+
                             <!-- if you are logged -->
                             <?php if (isset($_SESSION['user'])) { ?>
                                 <button type="submit" id="submit" class="btn btn-success">Booking</button>
                             <?php } else { ?>
+
                             <!-- if you're not logged -->   
                                 <div class="col-md-2">
                                     <input type="button" name="login" class="btn btn-success" onclick="window.location.href='admin/login.php'" value="Log In">
@@ -119,9 +120,7 @@ $hours = $conne->prepare($hours_query);
                                     <input type="button" name="login" class="btn btn-success" onclick="window.location.href='signup.php'" value="Sing Up">
                                 </div>
                             <?php } ?>
-                        </form>
-                        
-                        
+                        </form>                        
                     </div>
                 </div>
                 <div class="row">
@@ -132,6 +131,7 @@ $hours = $conne->prepare($hours_query);
             </div>
         <?php } ?>
     </div>
+
     <?php include 'footer.html'; ?> 
 
     <!-- JAVASCRIPT FILES PLACED AT THE BOTTOM TO REDUCE THE LOADING TIME  -->
