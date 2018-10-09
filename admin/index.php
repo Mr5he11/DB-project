@@ -96,25 +96,46 @@ $movies = $conn->query($movie_query);
             </div>
             <div class="row">
                 <div class="col-md-8 col-sm-8 col-xs-12">
-                    <div id="carousel-example" class="carousel slide slide-bdr" data-ride="carousel" style="width: 60%; height: 50%; overflow: hidden;">
+                    <div id="carousel-example" class="carousel slide slide-bdr" data-ride="carousel" style="width: 71vw;">
                         <div class="carousel-inner">
                             <?php $row = $movies->fetch();?>
-                            <div class="item active">
-                                <a href="update-movie.php?movie=<?php echo ($row['Id']); ?>">
-                                    <img src="<?php echo ($row['Locandina']); ?>" alt="" />
-                                </a>
+                            <div class="item active">     
+                                <div class="img-carousel">                              
+                                    <a href="update-movie.php?movie=<?php echo ($row['Id']); ?>">
+                                        <img src="<?php echo ($row['Locandina']); ?>" alt="" class="cr"/>
+                                    </a>
+                                </div>
+                                <div class="description-carousel">
+                                    <h1><?php echo($row['Titolo']); ?></h1>
+                                    </br>
+                                    <p><?php echo($row['Descrizione']); ?></p>
+                                </div>
                             </div>
                             <?php $row = $movies->fetch();?>
                             <div class="item">
-                                <a href="update-movie.php?movie=<?php echo ($row['Id']); ?>">
-                                    <img src="<?php echo ($row['Locandina']); ?>" alt="" />
-                                </a>
+                                <div class="img-carousel">
+                                    <a href="update-movie.php?movie=<?php echo ($row['Id']); ?>">
+                                        <img src="<?php echo ($row['Locandina']); ?>" alt="" class="cr"/>
+                                    </a>
+                                </div>
+                                <div class="description-carousel">
+                                    <h1><?php echo($row['Titolo']); ?></h1>
+                                    </br>
+                                    <p><?php echo($row['Descrizione']); ?></p>
+                                </div>
                             </div>
                             <?php $row = $movies->fetch();?>
                             <div class="item">
-                                <a href="update-movie.php?movie=<?php echo ($row['Id']); ?>">
-                                    <img src="<?php echo ($row['Locandina']); ?>" alt="" />
-                                </a>
+                                <div class="img-carousel">
+                                    <a href="update-movie.php?movie=<?php echo ($row['Id']); ?>">
+                                        <img src="<?php echo ($row['Locandina']); ?>" alt="" class="cr"/>
+                                    </a>
+                                </div>
+                                <div class="description-carousel">
+                                    <h1><?php echo($row['Titolo']); ?></h1>
+                                    </br>
+                                    <p><?php echo($row['Descrizione']); ?></p>
+                                </div>
                             </div>
                         </div>
                         <!--INDICATORS-->
