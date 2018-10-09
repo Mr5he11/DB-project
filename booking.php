@@ -21,7 +21,6 @@ if (isset($_POST['schedule'])) {
     $_check->execute([$_SESSION['user'], $id_pren]);
 
     if($_check->fetch()){
-        echo("QUI!!");
         $_SESSION['show-already-booked'] = true;
         header("Location: programmation.php");
         exit();
@@ -43,7 +42,7 @@ if (isset($_POST['schedule'])) {
     //seats available
     $seats_available = $row_seats["NumeroPosti"] - $row_seats_book["postiPrenotati"];
 
-    if ( $seats_available > 0 ) {
+    if ( $seats_available-$_POST['people'] > 0 ) {
         $query_insert = "INSERT INTO Prenotazioni (Utente, ProgrammazioneScelta, NumeroPostiPrenotati) VALUES (?, ?, ?)";
         $insert = $conn->prepare($query_insert);
         $ris = $insert->execute([$_SESSION['user'], $id_pren, $_POST['people']]);
