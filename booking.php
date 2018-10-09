@@ -37,12 +37,12 @@ if (isset($_POST['schedule'])) {
     echo("<br>".$row_seats["NumeroPosti"]." ".$seats_available."<br>");
 
     if ( $seats_available - $_POST['people'] >= 0 ) {
-        $query_insert = "INSERT INTO `Prenotazioni` (`Utente`, `ProgrammazioneScelta`, `NumeroPostiPrenotati`) VALUES ('?', '?', '?');";
+        $query_insert = "INSERT INTO `Prenotazioni` (`Utente`, `ProgrammazioneScelta`, `NumeroPostiPrenotati`) VALUES (?, ?, ?);";
         $insert = $conn->prepare($query_insert);
-        $insert->execute([$_SESSION['user']], $id_pren, $_POST['people']);
+        $insert->execute([$_SESSION['user'], $id_pren, $_POST['people']]);
 
         $_SESSION['booking'] = true;
-        headre("Location: index.php");
+        header("Location: index.php");
     }
 
 

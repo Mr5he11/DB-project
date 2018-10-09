@@ -71,6 +71,17 @@ $hours = $conne->prepare($hours_query);
                 </div>
             </div>
         </div>
+
+        <?php if(isset($_SESSION['booking']) && $_SESSION['booking'] == false) { $_SESSION['booking'] = true; ?>
+            <div class="container">
+                <div class="row">
+                    <div class="alert alert-danger" >
+                            <strong>WARNING :</strong> You have already booked this film!
+                    </div>
+                </div>
+            </div>
+        <?php } ?>
+
         <!--$movies runs the films-->
         <?php while ($row_film = $movies->fetch()) { ?>
             <div class="container">
