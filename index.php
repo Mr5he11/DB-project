@@ -55,12 +55,6 @@ $movies = $conn->query($movie_query);
                 </div>
             <?php }?>
             
-            <?php if(isset($_SESSION['booking']) && $_SESSION['booking'] == true) { ?>
-                <div class="alert alert-success" >
-                        <strong>SUCCESS:</strong> Successful booking! :)
-                </div>
-            <?php $_SESSION['booking'] = false; } ?>
-
             <div class="row">
                 <div class="col-md-8 col-sm-8 col-xs-12">
                     <div id="carousel-example" class="carousel slide slide-bdr" data-ride="carousel" style="width: 71vw;">

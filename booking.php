@@ -4,6 +4,7 @@
 session_start();
 
 if (isset($_POST['schedule'])) {
+
     //call prelude file (db connection, etc)
     require 'connect.php';
     $conn = Connection::getConnection();
@@ -14,7 +15,16 @@ if (isset($_POST['schedule'])) {
     $id_pren = $data[0];
     $room = $data[1];
 
-    echo($id_pren);
+    //check for booking duplicates
+    $_checkQuery = 'SELECT Utente, ProgrammazioneScelta FROM Prenotazioni WHERE Utente=? AND ProgrammazioneScelta=?';
+    $_check = $conn->prepare($_checkQuery);
+    $_check->execute([$_SESSION['user'], $id_pren]);
+
+    if($_check->fetch()){
+        $_SESSION['show-already-booked'] = true;
+        header("Location: programmation.php");
+        exit();
+    }
 
     //query seats not available
     $query_seats_booked = "SELECT sum(NumeroPostiPrenotati) as postiPrenotati FROM Prenotazioni JOIN Programmazione ON (ProgrammazioneScelta = Id) WHERE ProgrammazioneScelta = ?";
@@ -29,26 +39,19 @@ if (isset($_POST['schedule'])) {
     $seats->execute([$room]);
     $row_seats = $seats->fetch();
 
-    echo("<br>".$row_seats_book["postiPrenotati"]);
-
     //seats available
     $seats_available = $row_seats["NumeroPosti"] - $row_seats_book["postiPrenotati"];
 
-    echo("<br>".$row_seats["NumeroPosti"]." ".$seats_available."<br>");
-
-    if ( $seats_available - $_POST['people'] >= 0 ) {
-        $query_insert = "INSERT INTO `Prenotazioni` (`Utente`, `ProgrammazioneScelta`, `NumeroPostiPrenotati`) VALUES (?, ?, ?);";
+    if ( $seats_available-$_POST['people'] > 0 ) {
+        $query_insert = "INSERT INTO Prenotazioni (Utente, ProgrammazioneScelta, NumeroPostiPrenotati) VALUES (?, ?, ?)";
         $insert = $conn->prepare($query_insert);
-        $insert->execute([$_SESSION['user'], $id_pren, $_POST['people']]);
-
-        $_SESSION['booking'] = true;
-        header("Location: index.php");
+        $ris = $insert->execute([$_SESSION['user'], $id_pren, $_POST['people']]);
+        $_SESSION['show-booking-success'] = true;
+        header('Location: index.php');
+    } else {
+        $_SESSION['busy-room'] = true;
+        header("Location: programmation.php");
     }
-
-
-
-    $film = $_GET['film'];
-    echo("prova");
 
 
 } else {
