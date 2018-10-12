@@ -54,6 +54,12 @@ $movies = $conn->query($movie_query);
                         <strong>SUCCESS :</strong> Show booked successfully! :) 
                 </div>
             <?php }?>
+
+            <?php if (isset($_SESSION['update-profile-success']) && $_SESSION['update-profile-success']) {$_SESSION['update-profile-success'] = false;?>
+                <div class="alert alert-success" >
+                        <strong>SUCCESS :</strong> Personal profile information updated successfully! :)
+                </div>
+            <?php }?>
             
             <div class="row">
                 <div class="col-md-8 col-sm-8 col-xs-12">
