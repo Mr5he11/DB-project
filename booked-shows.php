@@ -64,20 +64,12 @@
                 <div class="col-md-12">
                     <h4 class="header-line">YOUR PRENOTATION</h4>
                 </div>
-            </div>
-
-            <?php if (isset($_SESSION['show-already-booked']) && $_SESSION['show-already-booked']) {$_SESSION['show-already-booked'] = false;?>
-                <div class="alert alert-danger" >
-                        <strong>WARNING :</strong> You have already booked for this show! :( 
-                </div>
-            <?php }?>
-
-            <?php if (isset($_SESSION['busy-room']) && $_SESSION['busy-room']) {$_SESSION['busy-room'] = false;?>
-                <div class="alert alert-danger" >
-                        <strong>WARNING :</strong> This show is full :( Try another one!
-                </div>
-            <?php }?>
-
+            </div>   
+                <?php if (isset($_SESSION['delete-booking']) && $_SESSION['delete-booking']) {  $_SESSION['delete-booking'] = false;?>
+                    <div class="alert alert-success" >
+                            <strong>SUCCESS :</strong> Booked deleted successfully! :) 
+                    </div>
+                <?php }?>           
         </div>
 
         <!--$movies runs the films-->
@@ -99,8 +91,7 @@
                                 <h4> Spettacolo delle <?php echo($row['Ora']." del giorno ".$row['Giorno']);?></h4>
                                 <h6> Posti prenotati: <?php echo($row['NumeroPostiPrenotati']);?></h6>
                                 
-                                <a role='button' class='btn btn-danger' href="delete-booking.php?programmazione=<?php echo($row['ProgrammazioneScelta']);?>" >Delete booking</a>
-
+                                <a role='button' class='btn btn-danger' href="delete-booking.php?programmazione=<?php echo($row['ProgrammazioneScelta']);?>">Delete booking</a>
                             </div>
                         </div>
                     </div>    

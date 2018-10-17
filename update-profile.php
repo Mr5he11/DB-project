@@ -17,7 +17,7 @@ $conn = Connection::getConnection();
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <meta name="description" content="" />
-    <meta name="author" content="Favero Andrea - xxxxxx, Medana Carlotta - 863421, Sello Stefano - 864851" />
+    <meta name="author" content="Favero Andrea - 864893, Medana Carlotta - 863421, Sello Stefano - 864851" />
     <!--[if IE]>
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <![endif]-->
