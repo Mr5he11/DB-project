@@ -55,6 +55,9 @@
                                 <li class="divider"></li>
                                 <li><a href="admin/exe-logout.php"></i>LOGOUT</a></li>
                             </ul>
+                            <li>
+                                <a href="booked-shows.php" <?php if ($_SESSION['page']=='booked-shows') { echo('class="menu-top-active"'); } ?>>BOOKED SHOWS</a>
+                            </li>
                         <?php } else { ?>
                         </li>
                         <li>
