@@ -64,12 +64,7 @@
                 <div class="col-md-12">
                     <h4 class="header-line">YOUR PRENOTATION</h4>
                 </div>
-            </div>   
-                <?php if (isset($_SESSION['delete-booking']) && $_SESSION['delete-booking']) {  $_SESSION['delete-booking'] = false;?>
-                    <div class="alert alert-success" >
-                            <strong>SUCCESS :</strong> Booked deleted successfully! :) 
-                    </div>
-                <?php }?>           
+            </div>              
         </div>
 
         <!--$movies runs the films-->

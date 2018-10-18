@@ -19,6 +19,6 @@
     $delete->execute([$pr,$_SESSION['user']]);
     
     //redirect to the booking-recap page
-    header("location: booked-shows.php?deleted=TRUE");
+    header("location: index.php");
 
 ?>            
