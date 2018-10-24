@@ -14,7 +14,7 @@
     //prenotaiton query
     $conn = Connection::getConnection();
 
-    $delete_query = "DELETE from prenotazioni where ProgrammazioneScelta = ? and utente = ?";
+    $delete_query = "DELETE from Prenotazioni where ProgrammazioneScelta = ? and utente = ?";
     $delete = $conn->prepare($delete_query);
     $delete->execute([$pr,$_SESSION['user']]);
     

@@ -73,6 +73,12 @@
                 </div>
             <?php }?>
 
+             <?php if (isset($_SESSION['missing_fields']) && $_SESSION['missing_fields']) {$_SESSION['missing_fields'] = false;?>
+                <div class="alert alert-danger" >
+                        <strong>WARNING :</strong> Please fill all fields! 
+                </div>
+            <?php }?>
+
             <?php if (isset($_SESSION['busy-room']) && $_SESSION['busy-room']) {$_SESSION['busy-room'] = false;?>
                 <div class="alert alert-danger" >
                         <strong>WARNING :</strong> This show is full :( Try another one!
@@ -108,7 +114,7 @@
                                 <?php $hours->execute([$row_film['Id'], $row_day['Giorno']]); 
                                 while($row_hours = $hours->fetch()) { ?>
                                     <td> 
-                                    <input type="radio" name="schedule" value="<?php echo($row_hours["Id"].".".$row_hours["Sala"]) ?>" > <?php echo($row_hours['Ora']); ?> </td>
+                                    <input type="radio" name="schedule" value="<?php echo($row_hours["Id"].".".$row_hours["Sala"]) ?>" required> <?php echo($row_hours['Ora']); ?> </td>
                                 <?php } ?>
                                 </tr>
                             <?php } ?>                    
@@ -116,7 +122,7 @@
                             
                             <div class="form-group">
                                 <label>How many seats?</label>
-                                <input type="number" name="people" class="form-control">
+                                <input type="number" name="people" class="form-control" required>
                             </div><br>
 
                             <!-- if you are logged -->

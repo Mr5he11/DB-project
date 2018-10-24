@@ -25,6 +25,9 @@
                             <a href="programmation.php" <?php if ($_SESSION['page']=='prgrammation') { echo('class="menu-top-active"'); } ?>>PROGRAMMATION</a>
                         </li>
                         <li>
+                            <a href="booked-shows.php" <?php if ($_SESSION['page']=='booked-shows') { echo('class="menu-top-active"'); } ?>>BOOKED SHOWS</a>
+                        </li>
+                        <li>
                         <?php 
                             if(isset($_SESSION['user'])){ 
                                 //user query in order to take name/surname
@@ -55,9 +58,7 @@
                                 <li class="divider"></li>
                                 <li><a href="admin/exe-logout.php"></i>LOGOUT</a></li>
                             </ul>
-                            <li>
-                                <a href="booked-shows.php" <?php if ($_SESSION['page']=='booked-shows') { echo('class="menu-top-active"'); } ?>>BOOKED SHOWS</a>
-                            </li>
+                            
                         <?php } else { ?>
                         </li>
                         <li>

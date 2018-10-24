@@ -3,7 +3,7 @@
 //start session
 session_start();
 
-if (isset($_POST['schedule'])) {
+if (isset($_POST['schedule']) && isset($_POST['people']) && $_POST['people'] != "") {
 
     //call prelude file (db connection, etc)
     require 'connect.php';
@@ -55,7 +55,7 @@ if (isset($_POST['schedule'])) {
 
 
 } else {
-    $_SESSION['schedule_not_selected'] = true;
+    $_SESSION['missing_fields'] = true;
     header("Location: programmation.php");
 }
 ?>
