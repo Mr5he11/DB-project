@@ -51,7 +51,9 @@
                     <div class="panel-body">
                         <!-- PHP LOGIN ERROR MESSAGE BEGIN -->
                         <?php if(isset($_SESSION['wrong_mail']) && $_SESSION['wrong_mail'] == TRUE ) { ?>
-                             <strong>WARNING :</strong> Wrong username or password.
+                            <div class="alert alert-danger">
+                                <strong>WARNING :</strong> Wrong username or password.
+                            </div>
                         </div>
                         <?php } ?>
                         <!-- PHP LOGIN ERROR MESSAGE END -->
