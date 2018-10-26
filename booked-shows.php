@@ -9,6 +9,12 @@
     //set useful variables
     $_SESSION['booked-shows'] = true;
 
+    if(!isset($_SESSION['user'])){
+        $_SESSION['must_login'] = true;
+        header("Location: index.php");
+        exit();
+    }
+
     //prenotaiton query
     $conn = Connection::getConnection();
 
@@ -17,6 +23,7 @@
                          From Film f JOIN Programmazione pr on pr.film=f.id 
                                      JOIN Prenotazioni p on p.ProgrammazioneScelta=pr.id
                          WHERE p.Utente=?";
+
     $booked = $conn->prepare($booked_query);
 
     $booked->execute([$_SESSION['user']]);

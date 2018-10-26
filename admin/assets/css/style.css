@@ -50,7 +50,7 @@ body {
 }
 .menu-section {
     background-color: #f7f7f7;
-    border-bottom:5px solid #9170E4;
+    border-bottom:5px solid #174F6A;
     width:100%
 }
 .menu-top-active {
@@ -91,7 +91,7 @@ border: 1px solid black;
 }
 
 .slide-bdr {
-   border:5px solid #9170E4
+   border:5px solid #174F6A
 }
 .chat-widget-left:after {
     top: 100%;
@@ -202,7 +202,7 @@ border: 1px solid black;
     font-size:13px;
     background-color: #f7f7f7;
     text-align:right;
-    border-top:5px solid #9170E4;
+    border-top:5px solid #174F6A;
 
 }
 
@@ -215,25 +215,24 @@ border: 1px solid black;
  ============================================================ */
 
 img.cr{
-    width: 32vw; 
+    width: auto; 
     height: 100%; 
 }
 
 .img-carousel{
     float: left;
-    width: 32vw; 
-    height: 97%; 
+    max-width:600px;
+    height: 100%; 
     overflow: hidden;
     min-width: 400px; 
     right: 20px;
-    margin: 20px 20px 20px 20px;
+    margin: 20px 5px 20px 5px;*/
     border: 3px solid black;
 }
 
 .description-carousel{
-    float: right;
-    width: 32vw; 
-    height: 97%; 
+    float: right; 
+
     position: relative;
     margin: 20px 20px 20px 20px;
 }

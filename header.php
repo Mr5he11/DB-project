@@ -24,10 +24,6 @@
                         <li>
                             <a href="programmation.php" <?php if ($_SESSION['page']=='prgrammation') { echo('class="menu-top-active"'); } ?>>PROGRAMMATION</a>
                         </li>
-                        <li>
-                            <a href="booked-shows.php" <?php if ($_SESSION['page']=='booked-shows') { echo('class="menu-top-active"'); } ?>>BOOKED SHOWS</a>
-                        </li>
-                        <li>
                         <?php 
                             if(isset($_SESSION['user'])){ 
                                 //user query in order to take name/surname
@@ -50,6 +46,10 @@
                                     header('Location: admin/index.php');
                                 }
                         ?>
+                        <li>
+                            <a href="booked-shows.php" <?php if ($_SESSION['page']=='booked-shows') { echo('class="menu-top-active"'); } ?>>BOOKED SHOWS</a>
+                        </li>
+                        <li>
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                                 <?php echo (strtoupper($user_name . ' ' . $user_surname . ' ')); ?> <i class="fa fa-angle-down"></i>
                             </a>

@@ -65,49 +65,67 @@ $movies = $conn->query($movie_query);
                     <div class="alert alert-success" >
                             <strong>SUCCESS :</strong> Booked deleted successfully! :) 
                     </div>
-                <?php }?>
+            <?php }?>
+
+            <?php if (isset($_SESSION['must_login']) && $_SESSION['must_login']) {$_SESSION['must_login'] = false;?>
+                <div class="alert alert-danger" >
+                        <strong>SORRY, </strong> you have to login to gain access to this function :(
+                </div>
+            <?php }?>
             
             <div class="row">
-                <div class="col-md-8 col-sm-8 col-xs-12">
-                    <div id="carousel-example" class="carousel slide slide-bdr" data-ride="carousel" style="width: 71vw;">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div id="carousel-example" class="carousel slide slide-bdr" data-ride="carousel">
                         <div class="carousel-inner">
                             <?php $row = $movies->fetch();?>
-                            <div class="item active">     
-                                <div class="img-carousel">                              
-                                    <a href="programmation.php">
-                                        <img src="<?php echo ($row['Locandina']); ?>" alt="" class="cr"/>
-                                    </a>
+                            <div class="item active">
+                                <div class="col-md-7 col-sm-12 col-xs-12">     
+                                    <div class="img-carousel">                              
+                                        <a href="programmation.php">
+                                            <img src="<?php echo ($row['Locandina']); ?>" alt="" class="cr"/>
+                                        </a>
+                                    </div>
                                 </div>
-                                <div class="description-carousel">
-                                    <h1><?php echo($row['Titolo']); ?></h1>
-                                    </br>
-                                    <p><?php echo($row['Descrizione']); ?></p>
-                                </div>
-                            </div>
-                            <?php $row = $movies->fetch();?>
-                            <div class="item">
-                                <div class="img-carousel">
-                                    <a href="programmation.php">
-                                        <img src="<?php echo ($row['Locandina']); ?>" alt="" class="cr"/>
-                                    </a>
-                                </div>
-                                <div class="description-carousel">
-                                    <h1><?php echo($row['Titolo']); ?></h1>
-                                    </br>
-                                    <p><?php echo($row['Descrizione']); ?></p>
+                                <div class="col-md-4 col-sm-12 col-xs-12">
+                                    <div class="description-carousel">
+                                        <h1><?php echo($row['Titolo']); ?></h1>
+                                        </br>
+                                        <p><?php echo($row['Descrizione']); ?></p>
+                                    </div>
                                 </div>
                             </div>
                             <?php $row = $movies->fetch();?>
                             <div class="item">
-                                <div class="img-carousel">
-                                    <a href="programmation.php">
-                                        <img src="<?php echo ($row['Locandina']); ?>" alt="" class="cr"/>
-                                    </a>
+                                <div class="col-md-7 col-sm-12 col-xs-12">     
+                                    <div class="img-carousel">                              
+                                        <a href="programmation.php">
+                                            <img src="<?php echo ($row['Locandina']); ?>" alt="" class="cr"/>
+                                        </a>
+                                    </div>
                                 </div>
-                                <div class="description-carousel">
-                                    <h1><?php echo($row['Titolo']); ?></h1>
-                                    </br>
-                                    <p><?php echo($row['Descrizione']); ?></p>
+                                <div class="col-md-4 col-sm-12 col-xs-12">
+                                    <div class="description-carousel">
+                                        <h1><?php echo($row['Titolo']); ?></h1>
+                                        </br>
+                                        <p><?php echo($row['Descrizione']); ?></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <?php $row = $movies->fetch();?>
+                            <div class="item">
+                                <div class="col-md-7 col-sm-12 col-xs-12">     
+                                    <div class="img-carousel">                              
+                                        <a href="programmation.php">
+                                            <img src="<?php echo ($row['Locandina']); ?>" alt="" class="cr"/>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-12 col-xs-12">
+                                    <div class="description-carousel">
+                                        <h1><?php echo($row['Titolo']); ?></h1>
+                                        </br>
+                                        <p><?php echo($row['Descrizione']); ?></p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
