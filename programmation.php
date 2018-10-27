@@ -19,7 +19,7 @@
     $days = $conn->prepare($days_query);
 
     //hours query
-    $hours_query = "SELECT Id, Ora, Sala FROM Programmazione WHERE Film = ? AND Giorno = ?";
+    $hours_query = "SELECT Id, Ora, Sala, Prezzo FROM Programmazione WHERE Film = ? AND Giorno = ?";
     $hours = $conn->prepare($hours_query);
 
 ?>
@@ -99,7 +99,7 @@
                         <!--description of film-->
                         <h2> <?php echo($row_film['Titolo']); ?> <br></h2>
                         <h4> Regia di: <?php echo($row_film['Regista']); ?> <br></h4>
-                        <h5> <?php echo($row_film['Descrizione']); ?><br><br><br> </h5>
+                        <h5> <?php echo($row_film['Descrizione']); ?><br><br><br> </h5> 
 
                         <form action="booking.php?film=<?php echo($row_film['Id'])?>" method="post">
 
@@ -113,8 +113,8 @@
                                 <!--$hours runs the hours-->
                                 <?php $hours->execute([$row_film['Id'], $row_day['Giorno']]); 
                                 while($row_hours = $hours->fetch()) { ?>
-                                    <td> 
-                                    <input type="radio" name="schedule" value="<?php echo($row_hours["Id"].".".$row_hours["Sala"]) ?>" required> <?php echo($row_hours['Ora']); ?> </td>
+                                    <td> <input type="radio" name="schedule" value="<?php echo($row_hours["Id"].".".$row_hours["Sala"]) ?>" required> <?php echo($row_hours['Ora']); ?> </td>
+                                    <td><b>Price:</b> <?php echo($row_hours['Prezzo']); ?>€</td>
                                 <?php } ?>
                                 </tr>
                             <?php } ?>                    
