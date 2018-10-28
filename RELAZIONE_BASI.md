@@ -45,13 +45,13 @@ Gli **utenti ordinari**, accedendo alla sezione principale del sito, avranno la 
 
 ### Schema ad Oggetti
 
-![Alt text](C:\xampp\htdocs\DB-project\Schema ad oggetti.PNG)
+![Alt text](Schema ad oggetti.PNG)
 
 ***
 
 ### Schema Relazionale
 
-![Alt text](C:\xampp\htdocs\DB-project\Schema Relazionale.PNG)
+![Alt text](Schema Relazionale.PNG)
 
 <div style="page-break-after: always;"></div>
 
